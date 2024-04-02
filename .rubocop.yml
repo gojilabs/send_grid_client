@@ -1,0 +1,21 @@
+# Extensions
+require:
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-factory_bot
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+Style/Documentation:
+  Enabled: false
+Style/RedundantFetchBlock:
+  Enabled: false
+Style/RedundantInterpolation:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 50
