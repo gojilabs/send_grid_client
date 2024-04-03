@@ -13,10 +13,14 @@ module SendGridClient
       response = client.client.mail._('send').post(request_body: request_body_json)
 
       log_response(payload: request_body_json, response:) if configuration.debug_mode
-      response
+      raise ApiError, response.body unless success?(response)
     end
 
     private
+
+    def success?(response)
+      response.status_code == '202'
+    end
 
     def request_body_json
       @request_body_json ||= @mail.to_json

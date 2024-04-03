@@ -11,6 +11,7 @@ require_relative 'send_grid_client/payload_generators/attachments/file_attachmen
 require_relative 'send_grid_client/payload_generators/attachment_generator'
 require_relative 'send_grid_client/payload_generators/personalization_generator'
 require_relative 'send_grid_client/payload_generators/mail_generator'
+require_relative 'send_grid_client/api_error'
 require_relative 'send_grid_client/api_client'
 require_relative 'send_grid_client/send_email_service'
 
