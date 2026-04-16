@@ -6,7 +6,7 @@ The SendGrid gem simplifies email dispatch via SendGrid's API
 
 1. Add this gem to your `Gemfile`
 ```shell
-gem 'send_grid_client', github: 'gojilabs/send_grid_client', tag: '<latest tag>'
+  gem 'send_grid_client', github: 'gojilabs/send_grid_client', tag: '<latest tag>'
 ```
 2. Install gem
 ```shell
@@ -21,7 +21,7 @@ rails generate send_grid_client:install
 
 ## Usage
 
-### Create SendGrid email attachement
+### Create SendGrid email attachment
 
 ```ruby
 # @param file_path_or_blob [Pathname, ActiveStorage::Blob] full path to file or Active Storage blob record
@@ -31,7 +31,7 @@ rails generate send_grid_client:install
 
 # An example:
 file_attachment = ::SendGridClient::PayloadGenerators::AttachmentGenerator.call(
-  Rails.root.join("app/assets/images/logo.png"), 
+  Rails.root.join("app/assets/images/logo.png"),
   disposition: 'inline',
   content_id: 'unique-img-src-in-template'
 )
@@ -45,11 +45,13 @@ blob_attachment = ::SendGridClient::PayloadGenerators::AttachmentGenerator.call(
 ```
 
 ### Send email notification
+
 ```ruby
 # @param email_to [String] receiver email address
 # @param template_id [String] SendGrid template identifier
 # @param template_data [Hash] SendGrid template payload
 # @param attachments [Array<SendGrid::Attachment>] (Optional) array of SendGrid attachments
+# @param reply_to [String] (Optional) reply to email
 ::SendGridClient::SendEmailService.call(email_to:, template_id:, template_data:)
 
 # An example:
@@ -68,6 +70,7 @@ blob_attachment = ::SendGridClient::PayloadGenerators::AttachmentGenerator.call(
 
 Feel free to improve something, add more unit test or extend this gem with new logic.
 Steps to do this:
+
 - open PR
 - test your code, confirm that it does not break existing functionality
 - bump gem version in your PR
