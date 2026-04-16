@@ -6,11 +6,13 @@ module SendGridClient
     # @param template_id [String] SendGrid template identifier
     # @param template_data [Hash] SendGrid template payload
     # @param attachments [Array<SendGrid::Attachment>] (Optional) array of SendGrid attachments
-    def initialize(email_to:, template_id:, template_data:, attachments: [])
+    # @param reply_to [String] (Optional) reply to email
+    def initialize(email_to:, template_id:, template_data:, attachments: [], reply_to: nil)
       @email_to = email_to
       @template_id = template_id
       @template_data = template_data
       @attachments = attachments
+      @reply_to = reply_to
       super
     end
 
@@ -24,7 +26,8 @@ module SendGridClient
       @mail ||= PayloadGenerators::MailGenerator.call(email_to: @email_to,
                                                       template_id: @template_id,
                                                       template_data: @template_data,
-                                                      attachments: @attachments)
+                                                      attachments: @attachments,
+                                                      reply_to: @reply_to)
     end
   end
 end

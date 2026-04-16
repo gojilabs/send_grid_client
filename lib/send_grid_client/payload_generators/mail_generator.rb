@@ -7,12 +7,13 @@ module SendGridClient
       # @param template_id [String] SendGrid template identifier
       # @param template_data [Hash] SendGrid template payload
       # @param attachments [Array<SendGrid::Attachment>] array of SendGrid attachments
-      def initialize(email_to:, template_id:, template_data:, attachments:)
+      # @param reply_to [String] (Optional) reply to email
+      def initialize(email_to:, template_id:, template_data:, attachments:, reply_to: nil)
         @email_to = email_to
         @template_id = template_id
         @template_data = template_data
         @attachments = attachments
-
+        @reply_to = reply_to
         @mail = ::SendGrid::Mail.new
         super
       end
@@ -30,6 +31,13 @@ module SendGridClient
       def setup_mail
         @mail.from = sender_email
         @mail.template_id = @template_id
+        add_reply_to
+      end
+
+      def add_reply_to
+        return unless @reply_to
+
+        @mail.reply_to = ::SendGrid::Email.new(email: @reply_to)
       end
 
       def setup_personalization
